@@ -6,5 +6,7 @@ As of right now, it has its intended functionality of loading in jet, cloud, and
 
 # TO BE ADDED:
 ~~-Score functionality (the longer you survive, the higher your score)~~
+
 -Scoreboard functionality to keep track of the highest 5-10 scores
+
 -Attack functionality so that its not just dodging, but more like a classic arcade game from the 70s or 80s.
