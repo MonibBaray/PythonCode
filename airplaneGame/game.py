@@ -1,5 +1,7 @@
 import pygame
 import random
+import time
+import sys
 
 #Import keyboard constants to be used later
 from pygame.locals import (
@@ -85,9 +87,20 @@ clock = pygame.time.Clock()
 #Initialize pygame
 pygame.init()
 
-
 #Creating the screen object
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Airplane Survival")
+clock = pygame.time.Clock()
+
+#Setting Definitions for colors and font
+black = (0, 0, 0)
+white = (255, 255, 255)
+font = pygame.font.Font(None, 36)
+
+#Initialize start time and definte the elapsed time function
+start_time = time.time()
+def get_elapsed_time():
+    return int(time.time() - start_time)
 
 #Create a custom event for adding new enemies and clouds
 ADDENEMY = pygame.USEREVENT + 1
@@ -116,6 +129,10 @@ while running:
     #Get all events in the queue
     for event in pygame.event.get():
 
+        elapsed_time = get_elapsed_time()
+        timer_text = font.render(f"{elapsed_time}", True, black)
+
+        timer_rect = timer_text.get_rect(topright=(SCREEN_WIDTH-10, 10))
         #Keypress event
         if event.type == KEYDOWN:
 
@@ -156,6 +173,8 @@ while running:
     if pygame.sprite.spritecollideany(player, enemies):
         player.kill()
         running = False
+
+    screen.blit(timer_text, timer_rect)
 
     #Flip everything to the display
     pygame.display.flip()
